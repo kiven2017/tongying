@@ -17,6 +17,7 @@
     }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
+    [hidden] { display: none !important; }
 
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
@@ -210,6 +211,88 @@
     }
     .news-more a:hover { border-color: #c4917a; color: #c4917a; }
 
+    /* Download */
+    .download {
+      background: linear-gradient(180deg, #fff 0%, #fcf9f7 100%);
+      padding-bottom: 80px;
+    }
+    .download-wrap {
+      display: grid; grid-template-columns: .9fr 1.1fr; gap: 36px;
+      align-items: stretch;
+    }
+    .download-intro {
+      padding: 38px; border-radius: 16px;
+      background: #3d3530; color: #fff;
+      display: flex; flex-direction: column; justify-content: center;
+      min-height: 320px;
+    }
+    .download-intro .eyebrow {
+      color: #dcc3b8; font-size: 13px; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .download-intro h3 {
+      font-size: 30px; line-height: 1.35; font-weight: 700;
+      margin-bottom: 16px; letter-spacing: 2px;
+    }
+    .download-intro p { color: #e8ddd8; font-size: 15px; line-height: 1.9; }
+    .download-list {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
+    }
+    .download-card {
+      background: #fff; border: 1px solid #f0ebe7; border-radius: 16px;
+      padding: 28px; box-shadow: 0 8px 28px rgba(61,53,48,.06);
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      transition: .3s;
+    }
+    .download-card:hover {
+      transform: translateY(-4px); box-shadow: 0 14px 36px rgba(61,53,48,.1);
+    }
+    .download-card .platform-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: #f5ede8; color: #c4917a; font-weight: 800;
+      font-size: 18px; margin-bottom: 14px;
+    }
+    .download-card h4 {
+      font-size: 20px; color: #3d3530; font-weight: 700; margin-bottom: 6px;
+    }
+    .download-card p {
+      color: #8a7f75; font-size: 14px; min-height: 44px; margin-bottom: 18px;
+    }
+    .qr-box {
+      width: 168px; height: 168px; padding: 10px; border-radius: 14px;
+      border: 1px solid #eadfd8; background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .download-qr {
+      width: 100%; height: 100%; object-fit: contain;
+    }
+    .qr-placeholder {
+      width: 100%; height: 100%; border-radius: 10px;
+      background:
+        linear-gradient(90deg, rgba(196,145,122,.1) 1px, transparent 1px),
+        linear-gradient(rgba(196,145,122,.1) 1px, transparent 1px),
+        #fcf9f7;
+      background-size: 18px 18px;
+      display: flex; align-items: center; justify-content: center;
+      color: #9d8a7d; font-size: 13px; line-height: 1.5; padding: 18px;
+    }
+    .download-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 150px; min-height: 44px; padding: 11px 24px;
+      border-radius: 40px; background: #c4917a; color: #fff;
+      font-size: 14px; font-weight: 600; transition: .3s;
+    }
+    .download-btn:hover {
+      background: #b07d66; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(196,145,122,.3);
+    }
+    .download-btn.disabled {
+      background: #d8cdc6; color: #fff; cursor: default; pointer-events: none;
+      box-shadow: none; transform: none;
+    }
+
     /* Footer */
     .footer {
       background: #2d2824; color: #b8ada5; padding: 60px 0 0;
@@ -240,6 +323,8 @@
       .product-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
       .news-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
       .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .download-wrap { grid-template-columns: 1fr; gap: 24px; }
+      .download-intro { min-height: auto; padding: 32px; }
       .section-title { padding: 60px 0 36px; }
       .section-title h2 { font-size: 28px; }
     }
@@ -288,6 +373,14 @@
       .service-card h4 { font-size: 16px; }
       .service-card p { font-size: 13px; }
 
+      .download { padding-bottom: 64px; }
+      .download-list { gap: 16px; }
+      .download-intro { padding: 28px; }
+      .download-intro h3 { font-size: 24px; }
+      .download-card { padding: 22px 16px; }
+      .qr-box { width: 142px; height: 142px; }
+      .download-card p { min-height: 40px; }
+
       .news-grid { grid-template-columns: 1fr; gap: 20px; }
       .news-card .img-wrap { height: 180px; }
       .news-card .body { padding: 18px; }
@@ -323,6 +416,16 @@
       .service-card h4 { font-size: 14px; }
       .service-card .en { font-size: 10px; }
 
+      .download { padding-bottom: 48px; }
+      .download-list { grid-template-columns: 1fr; }
+      .download-intro { padding: 24px 20px; border-radius: 14px; }
+      .download-intro h3 { font-size: 20px; letter-spacing: 1px; }
+      .download-intro p { font-size: 13px; }
+      .download-card { border-radius: 14px; }
+      .download-card h4 { font-size: 18px; }
+      .download-card p { min-height: 0; }
+      .download-btn { width: 100%; }
+
       .about-text h3 { font-size: 18px; }
       .about-text p { font-size: 13px; line-height: 1.7; }
       .about-text .btn { padding: 10px 28px; font-size: 13px; }
@@ -352,6 +455,7 @@
         <a href="#news" data-i18n="nav.news">新闻动态</a>
         <a href="#services" data-i18n="nav.services">服务支持</a>
         <a href="#footer" data-i18n="nav.contact">联系我们</a>
+        <a href="#download" data-i18n="nav.download">APP下载</a>
       </nav>
       <div class="header-lang">
         <a data-lang="zh" class="active">中文</a>
@@ -394,6 +498,44 @@
       <span class="active"></span>
       <span></span>
       <span></span>
+    </div>
+  </section>
+
+  <section class="download" id="download">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="download.title">APP下载</h2>
+        <p data-i18n="download.desc">扫码或点击按钮下载童印 APP，安卓与苹果版本将按设备分别跳转</p>
+      </div>
+      <div class="download-wrap">
+        <div class="download-intro">
+          <div class="eyebrow" data-i18n="download.eyebrow">TongYin App</div>
+          <h3 data-i18n="download.heading">手机端查看更方便<br>售后与产品资料随时获取</h3>
+          <p data-i18n="download.copy">这里可放置安卓安装包、苹果 App Store 或企业下载链接。下载地址配置后，二维码会自动生成，按钮会直接跳转到对应平台。</p>
+        </div>
+        <div class="download-list">
+          <div class="download-card" data-platform="android">
+            <div class="platform-icon">A</div>
+            <h4 data-i18n="download.android.title">安卓下载</h4>
+            <p data-i18n="download.android.desc">适用于 Android 手机和平板</p>
+            <div class="qr-box">
+              <img class="download-qr" data-platform="android" data-i18n-alt="download.android.qr" alt="安卓下载二维码" hidden>
+              <span class="qr-placeholder" data-i18n="download.qr.pending">二维码待配置</span>
+            </div>
+            <a class="download-btn" data-platform="android" href="#" target="_blank" rel="noopener" data-i18n="download.android.btn">安卓下载</a>
+          </div>
+          <div class="download-card" data-platform="ios">
+            <div class="platform-icon">iOS</div>
+            <h4 data-i18n="download.ios.title">苹果下载</h4>
+            <p data-i18n="download.ios.desc">适用于 iPhone 与 iPad</p>
+            <div class="qr-box">
+              <img class="download-qr" data-platform="ios" data-i18n-alt="download.ios.qr" alt="苹果下载二维码" hidden>
+              <span class="qr-placeholder" data-i18n="download.qr.pending">二维码待配置</span>
+            </div>
+            <a class="download-btn" data-platform="ios" href="#" target="_blank" rel="noopener" data-i18n="download.ios.btn">苹果下载</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -610,11 +752,18 @@
 
   <script>
     (function () {
+      // 在这里替换下载地址，二维码和按钮会自动更新。
+      var downloadLinks = {
+        android: '',
+        ios: 'https://apps.apple.com/cn/app/baby-bouncer/id6748784747'
+      };
+
       // ===== Translation data =====
       var lang = {
         zh: {
           'nav.products': '产品中心',
           'nav.about': '关于童印',
+          'nav.download': 'APP下载',
           'nav.news': '新闻动态',
           'nav.services': '服务支持',
           'nav.contact': '联系我们',
@@ -627,6 +776,20 @@
           'hero.s3.title': '全球 <strong>千万</strong><br>妈妈的信赖之选',
           'hero.s3.desc': '专业研发、生产、销售一体，产品远销海内外',
           'hero.s3.btn': '查看产品',
+          'download.title': 'APP下载',
+          'download.desc': '扫码或点击按钮下载童印 APP，安卓与苹果版本将按设备分别跳转',
+          'download.eyebrow': 'TongYin App',
+          'download.heading': '手机端查看更方便<br>售后与产品资料随时获取',
+          'download.copy': '这里可放置安卓安装包、苹果 App Store 或企业下载链接。下载地址配置后，二维码会自动生成，按钮会直接跳转到对应平台。',
+          'download.android.title': '安卓下载',
+          'download.android.desc': '适用于 Android 手机和平板',
+          'download.android.qr': '安卓下载二维码',
+          'download.android.btn': '安卓下载',
+          'download.ios.title': '苹果下载',
+          'download.ios.desc': '适用于 iPhone 与 iPad',
+          'download.ios.qr': '苹果下载二维码',
+          'download.ios.btn': '苹果下载',
+          'download.qr.pending': '二维码待配置',
           'products.title': '产品中心',
           'products.desc': '电动婴儿秋千 · 电动摇椅 · 婴儿摇篮 · 多功能餐椅 · 婴儿推车',
           'products.tabs.all': '全部',
@@ -708,6 +871,7 @@
         en: {
           'nav.products': 'Products',
           'nav.about': 'About Us',
+          'nav.download': 'App Download',
           'nav.news': 'News',
           'nav.services': 'Support',
           'nav.contact': 'Contact',
@@ -720,6 +884,20 @@
           'hero.s3.title': 'Trusted by <strong>Millions</strong><br>of Moms Worldwide',
           'hero.s3.desc': 'Integrated R&D, production & sales, exporting globally',
           'hero.s3.btn': 'View Products',
+          'download.title': 'App Download',
+          'download.desc': 'Scan the QR code or tap the button to download the TongYin app for Android or iOS',
+          'download.eyebrow': 'TongYin App',
+          'download.heading': 'A better mobile experience<br>for product info and support',
+          'download.copy': 'Android packages, App Store links or enterprise download links can be configured here. Once the URLs are added, QR codes are generated automatically and buttons jump to each platform.',
+          'download.android.title': 'Android Download',
+          'download.android.desc': 'For Android phones and tablets',
+          'download.android.qr': 'Android download QR code',
+          'download.android.btn': 'Android Download',
+          'download.ios.title': 'iOS Download',
+          'download.ios.desc': 'For iPhone and iPad',
+          'download.ios.qr': 'iOS download QR code',
+          'download.ios.btn': 'iOS Download',
+          'download.qr.pending': 'QR code pending',
           'products.title': 'Products',
           'products.desc': 'Electric Swings &middot; Rocking Chairs &middot; Cradles &middot; High Chairs &middot; Strollers',
           'products.tabs.all': 'All',
@@ -828,6 +1006,37 @@
           applyLang(this.getAttribute('data-lang'));
         });
       });
+
+      // ===== Download links and QR codes =====
+      function setupDownloads() {
+        var qrApi = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=';
+
+        document.querySelectorAll('.download-card[data-platform]').forEach(function (card) {
+          var platform = card.getAttribute('data-platform');
+          var url = downloadLinks[platform];
+          var button = card.querySelector('.download-btn');
+          var qr = card.querySelector('.download-qr');
+          var placeholder = card.querySelector('.qr-placeholder');
+
+          if (url) {
+            button.setAttribute('href', url);
+            button.removeAttribute('aria-disabled');
+            button.classList.remove('disabled');
+            qr.setAttribute('src', qrApi + encodeURIComponent(url));
+            qr.hidden = false;
+            placeholder.hidden = true;
+          } else {
+            button.setAttribute('href', '#download');
+            button.setAttribute('aria-disabled', 'true');
+            button.classList.add('disabled');
+            qr.removeAttribute('src');
+            qr.hidden = true;
+            placeholder.hidden = false;
+          }
+        });
+      }
+
+      setupDownloads();
 
       // ===== Hero slider =====
       var slides = document.querySelectorAll('#heroSlides .hero-slide');
