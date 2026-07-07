@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -458,8 +458,8 @@
         <a href="#download" data-i18n="nav.download">APP下载</a>
       </nav>
       <div class="header-lang">
-        <a data-lang="zh" class="active">中文</a>
-        <a data-lang="en">EN</a>
+        <a data-lang="zh">中文</a>
+        <a data-lang="en" class="active">EN</a>
       </div>
       <div class="menu-toggle" id="menuToggle">
         <span></span><span></span><span></span>
@@ -979,10 +979,11 @@
       };
 
       // ===== i18n engine =====
-      var currentLang = 'zh';
+      var currentLang = 'en';
 
       function applyLang(l) {
         currentLang = l;
+        document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
         var dict = lang[l];
         document.querySelectorAll('[data-i18n]').forEach(function (el) {
           var key = el.getAttribute('data-i18n');
@@ -1006,6 +1007,8 @@
           applyLang(this.getAttribute('data-lang'));
         });
       });
+
+      applyLang(currentLang);
 
       // ===== Download links and QR codes =====
       function setupDownloads() {
