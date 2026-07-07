@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>童印 - 婴儿电动秋千·摇椅·摇篮 自主知识产权品牌</title>
+  <meta name="description" content="中山童印 — 专业研发生产电动秋千、电动手推车、电动摇椅、电动摇篮、电动摇床等婴儿系列用品，拥有自主知识产权，欧盟标准认证。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: #2d2d2d;
+      background: #fff;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    [hidden] { display: none !important; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #f0ebe7;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; gap: 24px;
+    }
+    .logo { font-size: 26px; font-weight: 800; letter-spacing: 2px; color: #c4917a; }
+    .logo span { color: #a3b8a6; }
+    .nav { display: flex; gap: 28px; }
+    .nav a {
+      font-size: 14px; font-weight: 500; color: #4a4540;
+      transition: color .25s; position: relative;
+    }
+    .nav a::after {
+      content: ''; position: absolute; left: 0; bottom: -4px;
+      width: 0; height: 2px; background: #c4917a;
+      transition: width .3s;
+    }
+    .nav a:hover { color: #c4917a; }
+    .nav a:hover::after { width: 100%; }
+    .header-lang { display: flex; gap: 10px; font-size: 13px; }
+      .header-lang a { padding: 4px 12px; border-radius: 20px; border: 1px solid #e0d8d2; color: #6b625a; transition: .25s; cursor: pointer; }
+      .header-lang a:hover { border-color: #c4917a; color: #c4917a; }
+      .header-lang a.active { background: #c4917a; color: #fff; border-color: #c4917a; }
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .menu-toggle span { width: 24px; height: 2px; background: #4a4540; border-radius: 2px; transition: .3s; }
+
+    /* Hero */
+    .hero {
+      position: relative; height: 82vh; min-height: 520px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 1s ease;
+    }
+    .hero-bg.active { opacity: 1; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.25);
+    }
+    .hero-slides { position: relative; height: 100%; }
+    .hero-slide {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 1s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-content { text-align: center; padding: 0 20px; position: relative; z-index: 2; }
+    .hero-content h1 {
+      font-size: clamp(36px, 6vw, 64px); font-weight: 300; color: #3d3530;
+      letter-spacing: 6px; margin-bottom: 16px;
+    }
+    .hero-content h1 strong { font-weight: 700; color: #c4917a; }
+    .hero-content p {
+      font-size: clamp(16px, 2.2vw, 22px); color: #6b625a; max-width: 640px;
+      margin: 0 auto 32px; letter-spacing: 2px;
+    }
+    .hero-content .btn {
+      display: inline-block; padding: 14px 48px;
+      background: #c4917a; color: #fff; border-radius: 40px;
+      font-size: 15px; letter-spacing: 2px; transition: .3s;
+    }
+    .hero-content .btn:hover { background: #b07d66; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,145,122,.35); }
+    .hero-dots {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 3;
+    }
+    .hero-dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(107,98,90,.3); cursor: pointer; transition: .3s;
+    }
+    .hero-dots span.active { background: #c4917a; width: 28px; border-radius: 6px; }
+
+    /* Section title */
+    .section-title {
+      text-align: center; padding: 80px 0 48px;
+    }
+    .section-title h2 {
+      font-size: 32px; font-weight: 700; color: #3d3530;
+      letter-spacing: 4px; margin-bottom: 12px;
+    }
+    .section-title h2::after {
+      content: ''; display: block; width: 40px; height: 3px;
+      background: #c4917a; margin: 16px auto 0; border-radius: 2px;
+    }
+    .section-title p { color: #8a7f75; font-size: 15px; max-width: 600px; margin: 0 auto; }
+
+    /* Products */
+    .products { background: #fcf9f7; padding-bottom: 80px; }
+    .product-tabs {
+      display: flex; justify-content: center; gap: 4px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .product-tabs button {
+      padding: 10px 28px; border: none; background: transparent;
+      font-size: 14px; color: #6b625a; cursor: pointer; border-radius: 24px;
+      transition: .3s; font-weight: 500;
+    }
+    .product-tabs button:hover { background: #f0e8e2; }
+    .product-tabs button.active { background: #c4917a; color: #fff; }
+    .product-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .product-grid.hidden { display: none; }
+    .product-card {
+      background: #fff; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05); transition: .4s;
+    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 12px 36px rgba(0,0,0,.1); }
+    .product-card .img-wrap {
+      height: 240px; overflow: hidden; background: #f5f0ec;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: .5s; }
+    .product-card:hover .img-wrap img { transform: scale(1.08); }
+    .product-card .info { padding: 20px; }
+    .product-card .info h4 { font-size: 16px; font-weight: 600; color: #3d3530; margin-bottom: 6px; }
+    .product-card .info p { font-size: 13px; color: #8a7f75; }
+
+    /* About */
+    .about { padding-bottom: 80px; }
+    .about-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .about-image {
+      border-radius: 16px; overflow: hidden; background: #f5f0ec;
+      aspect-ratio: 4/3;
+    }
+    .about-image img { width: 100%; height: 100%; object-fit: cover; }
+    .about-text h3 { font-size: 26px; font-weight: 700; color: #3d3530; margin-bottom: 16px; }
+    .about-text h3 span { color: #c4917a; }
+    .about-text p { color: #6b625a; font-size: 15px; margin-bottom: 16px; line-height: 1.8; }
+    .about-text .btn {
+      display: inline-block; padding: 12px 36px;
+      border: 1px solid #c4917a; color: #c4917a; border-radius: 40px;
+      font-size: 14px; transition: .3s;
+    }
+    .about-text .btn:hover { background: #c4917a; color: #fff; }
+
+    /* Services */
+    .services { background: #fcf9f7; padding-bottom: 80px; }
+    .service-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .service-card {
+      text-align: center; padding: 40px 24px; background: #fff;
+      border-radius: 16px; transition: .4s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 8px 30px rgba(0,0,0,.06); }
+    .service-card .icon {
+      width: 64px; height: 64px; margin: 0 auto 20px;
+      background: #f5ede8; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; font-size: 28px;
+    }
+    .service-card h4 { font-size: 18px; font-weight: 600; color: #3d3530; margin-bottom: 6px; }
+    .service-card .en { font-size: 12px; color: #b8ada5; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+    .service-card p { font-size: 14px; color: #6b625a; }
+
+    /* News */
+    .news { padding-bottom: 80px; }
+    .news-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px;
+    }
+    .news-card {
+      background: #fff; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04); transition: .4s;
+    }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.08); }
+    .news-card .img-wrap { height: 200px; overflow: hidden; background: #f5f0ec; }
+    .news-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .news-card .body { padding: 24px; }
+    .news-card .date { font-size: 12px; color: #b8ada5; letter-spacing: 1px; }
+    .news-card h4 { font-size: 17px; font-weight: 600; margin: 6px 0 10px; color: #3d3530; }
+    .news-card p { font-size: 14px; color: #8a7f75; }
+    .news-more { text-align: center; margin-top: 40px; }
+    .news-more a {
+      display: inline-block; padding: 12px 40px; border: 1px solid #e0d8d2;
+      border-radius: 40px; font-size: 14px; color: #6b625a; transition: .3s;
+    }
+    .news-more a:hover { border-color: #c4917a; color: #c4917a; }
+
+    /* Download */
+    .download {
+      background: linear-gradient(180deg, #fff 0%, #fcf9f7 100%);
+      padding-bottom: 80px;
+    }
+    .download-wrap {
+      display: grid; grid-template-columns: .9fr 1.1fr; gap: 36px;
+      align-items: stretch;
+    }
+    .download-intro {
+      padding: 38px; border-radius: 16px;
+      background: #3d3530; color: #fff;
+      display: flex; flex-direction: column; justify-content: center;
+      min-height: 320px;
+    }
+    .download-intro .eyebrow {
+      color: #dcc3b8; font-size: 13px; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .download-intro h3 {
+      font-size: 30px; line-height: 1.35; font-weight: 700;
+      margin-bottom: 16px; letter-spacing: 2px;
+    }
+    .download-intro p { color: #e8ddd8; font-size: 15px; line-height: 1.9; }
+    .download-list {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
+    }
+    .download-card {
+      background: #fff; border: 1px solid #f0ebe7; border-radius: 16px;
+      padding: 28px; box-shadow: 0 8px 28px rgba(61,53,48,.06);
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      transition: .3s;
+    }
+    .download-card:hover {
+      transform: translateY(-4px); box-shadow: 0 14px 36px rgba(61,53,48,.1);
+    }
+    .download-card .platform-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: #f5ede8; color: #c4917a; font-weight: 800;
+      font-size: 18px; margin-bottom: 14px;
+    }
+    .download-card h4 {
+      font-size: 20px; color: #3d3530; font-weight: 700; margin-bottom: 6px;
+    }
+    .download-card p {
+      color: #8a7f75; font-size: 14px; min-height: 44px; margin-bottom: 18px;
+    }
+    .qr-box {
+      width: 168px; height: 168px; padding: 10px; border-radius: 14px;
+      border: 1px solid #eadfd8; background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .download-qr {
+      width: 100%; height: 100%; object-fit: contain;
+    }
+    .qr-placeholder {
+      width: 100%; height: 100%; border-radius: 10px;
+      background:
+        linear-gradient(90deg, rgba(196,145,122,.1) 1px, transparent 1px),
+        linear-gradient(rgba(196,145,122,.1) 1px, transparent 1px),
+        #fcf9f7;
+      background-size: 18px 18px;
+      display: flex; align-items: center; justify-content: center;
+      color: #9d8a7d; font-size: 13px; line-height: 1.5; padding: 18px;
+    }
+    .download-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 150px; min-height: 44px; padding: 11px 24px;
+      border-radius: 40px; background: #c4917a; color: #fff;
+      font-size: 14px; font-weight: 600; transition: .3s;
+    }
+    .download-btn:hover {
+      background: #b07d66; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(196,145,122,.3);
+    }
+    .download-btn.disabled {
+      background: #d8cdc6; color: #fff; cursor: default; pointer-events: none;
+      box-shadow: none; transform: none;
+    }
+
+    /* Footer */
+    .footer {
+      background: #2d2824; color: #b8ada5; padding: 60px 0 0;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+      padding-bottom: 40px;
+    }
+    .footer h3 { font-size: 18px; color: #fff; margin-bottom: 16px; font-weight: 600; }
+    .footer p, .footer a { font-size: 14px; line-height: 2; display: block; }
+    .footer a:hover { color: #c4917a; }
+    .footer-brand .logo { margin-bottom: 12px; display: inline-block; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 20px 0; text-align: center; font-size: 13px;
+    }
+
+    /* === Responsive Design === */
+
+    /* Tablet (768-1024px) */
+    @media (max-width: 1024px) {
+      .hero { height: 70vh; min-height: 440px; }
+      .hero-content h1 { font-size: clamp(30px, 5vw, 48px); }
+      .hero-content p { font-size: clamp(15px, 2vw, 20px); }
+      .about-wrap { gap: 40px; }
+      .about-text h3 { font-size: 22px; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+      .news-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .download-wrap { grid-template-columns: 1fr; gap: 24px; }
+      .download-intro { min-height: auto; padding: 32px; }
+      .section-title { padding: 60px 0 36px; }
+      .section-title h2 { font-size: 28px; }
+    }
+
+    /* Mobile (<768px) */
+    @media (max-width: 768px) {
+      .header-inner { height: 60px; }
+      .logo { font-size: 22px; }
+      .nav {
+        display: none; flex-direction: column; background: #fff;
+        position: absolute; top: 60px; left: 0; right: 0; padding: 16px 20px;
+        border-bottom: 1px solid #f0ebe7; gap: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.06);
+      }
+      .nav.open { display: flex; }
+      .nav a { font-size: 15px; padding: 6px 0; }
+      .menu-toggle { display: flex; }
+      .header-lang { gap: 6px; }
+      .header-lang a { font-size: 12px; padding: 3px 10px; }
+
+      .hero { height: 56vh; min-height: 360px; }
+      .hero-content h1 { font-size: clamp(24px, 6vw, 34px); letter-spacing: 3px; }
+      .hero-content p { font-size: clamp(13px, 2.5vw, 16px); margin-bottom: 24px; }
+      .hero-content .btn { padding: 12px 36px; font-size: 14px; }
+      .hero-dots { bottom: 24px; }
+
+      .section-title { padding: 48px 0 28px; }
+      .section-title h2 { font-size: 24px; letter-spacing: 2px; }
+      .section-title p { font-size: 14px; }
+
+      .product-tabs { gap: 2px; margin-bottom: 28px; }
+      .product-tabs button { padding: 8px 18px; font-size: 13px; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+      .product-card .img-wrap { height: 180px; }
+      .product-card .info { padding: 14px; }
+      .product-card .info h4 { font-size: 14px; }
+      .product-card .info p { font-size: 12px; }
+
+      .about-wrap { grid-template-columns: 1fr; gap: 28px; }
+      .about-image { aspect-ratio: 16/10; }
+      .about-text h3 { font-size: 20px; }
+      .about-text p { font-size: 14px; }
+
+      .service-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .service-card { padding: 28px 16px; }
+      .service-card .icon { width: 52px; height: 52px; font-size: 22px; margin-bottom: 14px; }
+      .service-card h4 { font-size: 16px; }
+      .service-card p { font-size: 13px; }
+
+      .download { padding-bottom: 64px; }
+      .download-list { gap: 16px; }
+      .download-intro { padding: 28px; }
+      .download-intro h3 { font-size: 24px; }
+      .download-card { padding: 22px 16px; }
+      .qr-box { width: 142px; height: 142px; }
+      .download-card p { min-height: 40px; }
+
+      .news-grid { grid-template-columns: 1fr; gap: 20px; }
+      .news-card .img-wrap { height: 180px; }
+      .news-card .body { padding: 18px; }
+      .news-card h4 { font-size: 15px; }
+
+      .footer { padding: 40px 0 0; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; padding-bottom: 28px; }
+      .footer h3 { font-size: 16px; }
+      .footer p, .footer a { font-size: 13px; }
+    }
+
+    /* Small mobile (<480px) */
+    @media (max-width: 480px) {
+      .container { padding: 0 14px; }
+
+      .hero { height: 48vh; min-height: 300px; }
+      .hero-content h1 { font-size: 22px; letter-spacing: 2px; }
+      .hero-content p { font-size: 13px; margin-bottom: 20px; max-width: 100%; }
+      .hero-content .btn { padding: 10px 28px; font-size: 13px; }
+
+      .section-title { padding: 36px 0 20px; }
+      .section-title h2 { font-size: 20px; }
+      .section-title h2::after { width: 32px; margin-top: 12px; }
+
+      .product-grid { grid-template-columns: 1fr; gap: 14px; }
+      .product-card .img-wrap { height: 200px; }
+      .product-tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; padding-bottom: 8px; }
+      .product-tabs button { flex-shrink: 0; }
+
+      .service-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .service-card { padding: 20px 12px; }
+      .service-card .icon { width: 44px; height: 44px; font-size: 18px; }
+      .service-card h4 { font-size: 14px; }
+      .service-card .en { font-size: 10px; }
+
+      .download { padding-bottom: 48px; }
+      .download-list { grid-template-columns: 1fr; }
+      .download-intro { padding: 24px 20px; border-radius: 14px; }
+      .download-intro h3 { font-size: 20px; letter-spacing: 1px; }
+      .download-intro p { font-size: 13px; }
+      .download-card { border-radius: 14px; }
+      .download-card h4 { font-size: 18px; }
+      .download-card p { min-height: 0; }
+      .download-btn { width: 100%; }
+
+      .about-text h3 { font-size: 18px; }
+      .about-text p { font-size: 13px; line-height: 1.7; }
+      .about-text .btn { padding: 10px 28px; font-size: 13px; }
+
+      .news-grid { gap: 16px; }
+      .news-card .img-wrap { height: 160px; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-bottom { font-size: 12px; padding: 16px 0; }
+    }
+
+    /* Large screens (>1440px) */
+    @media (min-width: 1440px) {
+      .container { max-width: 1320px; }
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero { height: 78vh; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">童印 <span>·</span> Baby</a>
+      <nav class="nav" id="nav">
+        <a href="#products" data-i18n="nav.products">产品中心</a>
+        <a href="#about" data-i18n="nav.about">关于童印</a>
+        <a href="#news" data-i18n="nav.news">新闻动态</a>
+        <a href="#services" data-i18n="nav.services">服务支持</a>
+        <a href="#footer" data-i18n="nav.contact">联系我们</a>
+        <a href="#download" data-i18n="nav.download">APP下载</a>
+      </nav>
+      <div class="header-lang">
+        <a data-lang="zh" class="active">中文</a>
+        <a data-lang="en">EN</a>
+      </div>
+      <div class="menu-toggle" id="menuToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-bg active" style="background-image:url(http://www.tongyin-baby.com/templates/main/images/banner011.jpg)"></div>
+      <div class="hero-bg" style="background-image:url(http://www.tongyin-baby.com/templates/main/images/banner031.jpg)"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-slide active">
+        <div class="hero-content">
+          <h1 data-i18n="hero.s1.title">安心 <strong>童印</strong><br>陪伴成长每一步</h1>
+          <p data-i18n="hero.s1.desc">拥有自主知识产权的婴儿电动秋千 · 摇椅 · 摇篮，欧盟标准认证</p>
+          <a href="#products" class="btn" data-i18n="hero.s1.btn">探索产品</a>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <div class="hero-content">
+          <h1 data-i18n="hero.s2.title">科技 <strong>呵护</strong><br>智能摆动 宝宝安睡</h1>
+          <p data-i18n="hero.s2.desc">微电脑控制技术，自主知识产权专利产品，品质稳定更安心</p>
+          <a href="#products" class="btn" data-i18n="hero.s2.btn">了解更多</a>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <div class="hero-content">
+          <h1 data-i18n="hero.s3.title">全球 <strong>千万</strong><br>妈妈的信赖之选</h1>
+          <p data-i18n="hero.s3.desc">专业研发、生产、销售一体，产品远销海内外</p>
+          <a href="#products" class="btn" data-i18n="hero.s3.btn">查看产品</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-dots" id="heroDots">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+    </div>
+  </section>
+
+  <section class="download" id="download">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="download.title">APP下载</h2>
+        <p data-i18n="download.desc">扫码或点击按钮下载童印 APP，安卓与苹果版本将按设备分别跳转</p>
+      </div>
+      <div class="download-wrap">
+        <div class="download-intro">
+          <div class="eyebrow" data-i18n="download.eyebrow">TongYin App</div>
+          <h3 data-i18n="download.heading">手机端查看更方便<br>售后与产品资料随时获取</h3>
+          <p data-i18n="download.copy">这里可放置安卓安装包、苹果 App Store 或企业下载链接。下载地址配置后，二维码会自动生成，按钮会直接跳转到对应平台。</p>
+        </div>
+        <div class="download-list">
+          <div class="download-card" data-platform="android">
+            <div class="platform-icon">A</div>
+            <h4 data-i18n="download.android.title">安卓下载</h4>
+            <p data-i18n="download.android.desc">适用于 Android 手机和平板</p>
+            <div class="qr-box">
+              <img class="download-qr" data-platform="android" data-i18n-alt="download.android.qr" alt="安卓下载二维码" hidden>
+              <span class="qr-placeholder" data-i18n="download.qr.pending">二维码待配置</span>
+            </div>
+            <a class="download-btn" data-platform="android" href="#" rel="noopener" data-i18n="download.android.btn">安卓下载</a>
+          </div>
+          <div class="download-card" data-platform="ios">
+            <div class="platform-icon">iOS</div>
+            <h4 data-i18n="download.ios.title">苹果下载</h4>
+            <p data-i18n="download.ios.desc">适用于 iPhone 与 iPad</p>
+            <div class="qr-box">
+              <img class="download-qr" data-platform="ios" data-i18n-alt="download.ios.qr" alt="苹果下载二维码" hidden>
+              <span class="qr-placeholder" data-i18n="download.qr.pending">二维码待配置</span>
+            </div>
+            <a class="download-btn" data-platform="ios" href="#" rel="noopener" data-i18n="download.ios.btn">苹果下载</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="products.title">产品中心</h2>
+        <p data-i18n="products.desc">电动婴儿秋千 · 电动摇椅 · 婴儿摇篮 · 多功能餐椅 · 婴儿推车</p>
+      </div>
+      <div class="product-tabs" id="productTabs">
+        <button class="active" data-cat="all" data-i18n="products.tabs.all">全部</button>
+        <button data-cat="swing" data-i18n="products.tabs.swing">电动婴儿秋千</button>
+        <button data-cat="rocking" data-i18n="products.tabs.rocking">电动婴儿摇椅</button>
+        <button data-cat="cradle" data-i18n="products.tabs.cradle">婴儿摇篮/床</button>
+      </div>
+      <div class="product-grid" id="productGrid">
+        <div class="product-card" data-cat="swing">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/upload/201611/09/201611091643179036.jpg" data-i18n-alt="products.card1.img" alt="新生儿宝宝智能秋千">
+          </div>
+          <div class="info">
+            <h4 data-i18n="products.card1.title">新生儿宝宝智能秋千</h4>
+            <p data-i18n="products.card1.desc">哄睡左右摇摆椅，智能定时，轻柔晃动</p>
+          </div>
+        </div>
+        <div class="product-card" data-cat="rocking">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/upload/201611/09/201611091643323382.jpg" data-i18n-alt="products.card2.img" alt="加大婴儿电动摇椅摇篮摇床">
+          </div>
+          <div class="info">
+            <h4 data-i18n="products.card2.title">加大婴儿电动摇椅</h4>
+            <p data-i18n="products.card2.desc">摇摇椅安抚躺椅摇篮床，哄娃哄睡神器</p>
+          </div>
+        </div>
+        <div class="product-card" data-cat="cradle">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/upload/201611/09/201611091642400769.jpg" data-i18n-alt="products.card3.img" alt="婴儿摇篮摇篮床">
+          </div>
+          <div class="info">
+            <h4 data-i18n="products.card3.title">婴儿摇篮床</h4>
+            <p data-i18n="products.card3.desc">电动摇篮摇床宝宝摇篮床睡篮游戏床</p>
+          </div>
+        </div>
+        <div class="product-card" data-cat="rocking">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/upload/201611/09/201611091643583902.jpg" data-i18n-alt="products.card4.img" alt="婴儿摇篮摇椅电动摇床">
+          </div>
+          <div class="info">
+            <h4 data-i18n="products.card4.title">婴儿摇篮摇椅电动摇床</h4>
+            <p data-i18n="products.card4.desc">宝宝摇椅安抚躺椅，bb秋千吊床</p>
+          </div>
+        </div>
+        <div class="product-card" data-cat="rocking">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/upload/201611/10/201611100927482901.jpg" data-i18n-alt="products.card5.img" alt="加大婴儿电动摇椅">
+          </div>
+          <div class="info">
+            <h4 data-i18n="products.card5.title">加大婴儿电动摇椅</h4>
+            <p data-i18n="products.card5.desc">安抚躺椅摇篮床，哄娃哄睡神器</p>
+          </div>
+        </div>
+        <div class="product-card" data-cat="cradle">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/upload/201611/09/201611091643088026.jpg" data-i18n-alt="products.card6.img" alt="多功能电动婴儿摇篮">
+          </div>
+          <div class="info">
+            <h4 data-i18n="products.card6.title">多功能电动婴儿摇篮</h4>
+            <p data-i18n="products.card6.desc">睡床哄睡宝，电动摇篮带蚊帐</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="about.title">关于童印</h2>
+        <p data-i18n="about.desc">一家集产品研发、生产、销售于一体的婴童用品创造企业</p>
+      </div>
+      <div class="about-wrap">
+        <div class="about-image">
+          <img src="http://www.tongyin-baby.com/upload/201611/03/201611031614254401.jpg" data-i18n-alt="about.img" alt="童印公司">
+        </div>
+        <div class="about-text">
+          <h3 data-i18n="about.heading">始于 <span>2008</span> · 品质如一</h3>
+          <p data-i18n="about.p1">中山市童印儿童用品有限公司成立于2008年，占地11401平方米，位于美丽的广东省中山市小榄镇。专业从事设计、生产、销售电动婴儿秋千、多功能婴儿摇椅、电动摇椅、婴儿摇篮、婴儿高餐椅和婴儿推车。</p>
+          <p data-i18n="about.p2">公司产品符合 EN16232、EN71、EN12790、EN62115 等相关标准。坚持"质量第一，质量和安全是企业的生命"为原则，大规模生产的废品率一直控制在1%以下。</p>
+          <a href="#" class="btn" data-i18n="about.btn">了解更多</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="services.title">我们的优势</h2>
+        <p data-i18n="services.desc">强大的售后服务团队，为您宝宝的健康成长提供最贴心的服务</p>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="icon">&#9670;</div>
+          <h4 data-i18n="services.card1.title">专业团队</h4>
+          <p class="en" data-i18n="services.card1.en">Professional Team</p>
+          <p data-i18n="services.card1.desc">国际水平设计研发团队、强大售后服务团队</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">&#9829;</div>
+          <h4 data-i18n="services.card2.title">优质服务</h4>
+          <p class="en" data-i18n="services.card2.en">High-quality Service</p>
+          <p data-i18n="services.card2.desc">以人为本，诚信第一，贴心服务</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">&#10003;</div>
+          <h4 data-i18n="services.card3.title">品质优越</h4>
+          <p class="en" data-i18n="services.card3.en">Superior Quality</p>
+          <p data-i18n="services.card3.desc">质量第一，质量和安全是企业的生命</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">&#9881;</div>
+          <h4 data-i18n="services.card4.title">技术先进</h4>
+          <p class="en" data-i18n="services.card4.en">Advanced Technology</p>
+          <p data-i18n="services.card4.desc">欧盟标准、自主知识产权专利产品</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news" id="news">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="news.title">新闻动态</h2>
+        <p data-i18n="news.desc">了解童印最新资讯与行业动态</p>
+      </div>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/upload/201611/03/201611031619045339.jpg" data-i18n-alt="news.card1.img" alt="展会展览">
+          </div>
+          <div class="body">
+            <div class="date">2024.06.17</div>
+            <h4 data-i18n="news.card1.title">参加各样展会展览</h4>
+            <p data-i18n="news.card1.desc">各式展会展览，欢迎莅临参观指导。</p>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/templates/main/images/rongyu.jpg" data-i18n-alt="news.card2.img" alt="荣誉证书">
+          </div>
+          <div class="body">
+            <div class="date">2024.06.16</div>
+            <h4 data-i18n="news.card2.title">最新产品设计与展览</h4>
+            <p data-i18n="news.card2.desc">欢迎您访问，有一系列最新的项目与精湛的设计展览。</p>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="img-wrap">
+            <img src="http://www.tongyin-baby.com/upload/201611/09/201611091644208331.jpg" data-i18n-alt="news.card3.img" alt="婴儿床摇床宝宝床">
+          </div>
+          <div class="body">
+            <div class="date">2024.05.28</div>
+            <h4 data-i18n="news.card3.title">童印荣获多项权威认证</h4>
+            <p data-i18n="news.card3.desc">公司产品符合欧盟标准，拥有自主知识产权专利技术。</p>
+          </div>
+        </div>
+      </div>
+      <div class="news-more">
+        <a href="#" data-i18n="news.more">+ 更多新闻</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">童印 · Baby</a>
+          <p data-i18n="footer.company">中山市童印儿童用品有限公司</p>
+          <p data-i18n="footer.address">广东省中山市小榄镇</p>
+          <p data-i18n="footer.tel">电话：0760-2210 0000</p>
+          <p>邮箱：info@tongyin-baby.com</p>
+        </div>
+        <div>
+          <h3 data-i18n="footer.products.title">产品中心</h3>
+          <a href="#" data-i18n="footer.products.l1">电动婴儿秋千</a>
+          <a href="#" data-i18n="footer.products.l2">多功能婴儿车</a>
+          <a href="#" data-i18n="footer.products.l3">电动婴儿摇椅</a>
+          <a href="#" data-i18n="footer.products.l4">婴儿摇篮/床</a>
+          <a href="#" data-i18n="footer.products.l5">多功能餐椅</a>
+        </div>
+        <div>
+          <h3 data-i18n="footer.about.title">关于童印</h3>
+          <a href="#" data-i18n="footer.about.l1">公司简介</a>
+          <a href="#" data-i18n="footer.about.l2">企业文化</a>
+          <a href="#" data-i18n="footer.about.l3">发展历程</a>
+          <a href="#" data-i18n="footer.about.l4">荣誉证书</a>
+        </div>
+        <div>
+          <h3 data-i18n="footer.support.title">服务支持</h3>
+          <a href="#" data-i18n="footer.support.l1">服务理念</a>
+          <a href="#" data-i18n="footer.support.l2">常见问题</a>
+          <a href="#" data-i18n="footer.support.l3">留言反馈</a>
+          <a href="#" data-i18n="footer.support.l4">联系我们</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span data-i18n="footer.copyright">Copyright &copy; 2016 - 2025 togyibaby.com All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // 在这里替换下载地址，二维码和按钮会自动更新。
+      var downloadLinks = {
+        android: 'http://www.togyibaby.com/app-release.apk',
+        ios: 'https://apps.apple.com/cn/app/baby-bouncer/id6748784747'
+      };
+
+      // ===== Translation data =====
+      var lang = {
+        zh: {
+          'nav.products': '产品中心',
+          'nav.about': '关于童印',
+          'nav.download': 'APP下载',
+          'nav.news': '新闻动态',
+          'nav.services': '服务支持',
+          'nav.contact': '联系我们',
+          'hero.s1.title': '安心 <strong>童印</strong><br>陪伴成长每一步',
+          'hero.s1.desc': '拥有自主知识产权的婴儿电动秋千 · 摇椅 · 摇篮，欧盟标准认证',
+          'hero.s1.btn': '探索产品',
+          'hero.s2.title': '科技 <strong>呵护</strong><br>智能摆动 宝宝安睡',
+          'hero.s2.desc': '微电脑控制技术，自主知识产权专利产品，品质稳定更安心',
+          'hero.s2.btn': '了解更多',
+          'hero.s3.title': '全球 <strong>千万</strong><br>妈妈的信赖之选',
+          'hero.s3.desc': '专业研发、生产、销售一体，产品远销海内外',
+          'hero.s3.btn': '查看产品',
+          'download.title': 'APP下载',
+          'download.desc': '扫码或点击按钮下载童印 APP，安卓与苹果版本将按设备分别跳转',
+          'download.eyebrow': 'TongYin App',
+          'download.heading': '手机端查看更方便<br>售后与产品资料随时获取',
+          'download.copy': '这里可放置安卓安装包、苹果 App Store 或企业下载链接。下载地址配置后，二维码会自动生成，按钮会直接跳转到对应平台。',
+          'download.android.title': '安卓下载',
+          'download.android.desc': '适用于 Android 手机和平板',
+          'download.android.qr': '安卓下载二维码',
+          'download.android.btn': '安卓下载',
+          'download.ios.title': '苹果下载',
+          'download.ios.desc': '适用于 iPhone 与 iPad',
+          'download.ios.qr': '苹果下载二维码',
+          'download.ios.btn': '苹果下载',
+          'download.qr.pending': '二维码待配置',
+          'products.title': '产品中心',
+          'products.desc': '电动婴儿秋千 · 电动摇椅 · 婴儿摇篮 · 多功能餐椅 · 婴儿推车',
+          'products.tabs.all': '全部',
+          'products.tabs.swing': '电动婴儿秋千',
+          'products.tabs.rocking': '电动婴儿摇椅',
+          'products.tabs.cradle': '婴儿摇篮/床',
+          'products.card1.img': '新生儿宝宝智能秋千',
+          'products.card1.title': '新生儿宝宝智能秋千',
+          'products.card1.desc': '哄睡左右摇摆椅，智能定时，轻柔晃动',
+          'products.card2.img': '加大婴儿电动摇椅摇篮摇床',
+          'products.card2.title': '加大婴儿电动摇椅',
+          'products.card2.desc': '摇摇椅安抚躺椅摇篮床，哄娃哄睡神器',
+          'products.card3.img': '婴儿摇篮摇篮床',
+          'products.card3.title': '婴儿摇篮床',
+          'products.card3.desc': '电动摇篮摇床宝宝摇篮床睡篮游戏床',
+          'products.card4.img': '婴儿摇篮摇椅电动摇床',
+          'products.card4.title': '婴儿摇篮摇椅电动摇床',
+          'products.card4.desc': '宝宝摇椅安抚躺椅，bb秋千吊床',
+          'products.card5.img': '加大婴儿电动摇椅',
+          'products.card5.title': '加大婴儿电动摇椅',
+          'products.card5.desc': '安抚躺椅摇篮床，哄娃哄睡神器',
+          'products.card6.img': '多功能电动婴儿摇篮',
+          'products.card6.title': '多功能电动婴儿摇篮',
+          'products.card6.desc': '睡床哄睡宝，电动摇篮带蚊帐',
+          'about.title': '关于童印',
+          'about.desc': '一家集产品研发、生产、销售于一体的婴童用品创造企业',
+          'about.img': '童印公司',
+          'about.heading': '始于 <span>2008</span> · 品质如一',
+          'about.p1': '中山市童印儿童用品有限公司成立于2008年，占地11401平方米，位于美丽的广东省中山市小榄镇。专业从事设计、生产、销售电动婴儿秋千、多功能婴儿摇椅、电动摇椅、婴儿摇篮、婴儿高餐椅和婴儿推车。',
+          'about.p2': '公司产品符合 EN16232、EN71、EN12790、EN62115 等相关标准。坚持"质量第一，质量和安全是企业的生命"为原则，大规模生产的废品率一直控制在1%以下。',
+          'about.btn': '了解更多',
+          'services.title': '我们的优势',
+          'services.desc': '强大的售后服务团队，为您宝宝的健康成长提供最贴心的服务',
+          'services.card1.title': '专业团队',
+          'services.card1.en': 'Professional Team',
+          'services.card1.desc': '国际水平设计研发团队、强大售后服务团队',
+          'services.card2.title': '优质服务',
+          'services.card2.en': 'High-quality Service',
+          'services.card2.desc': '以人为本，诚信第一，贴心服务',
+          'services.card3.title': '品质优越',
+          'services.card3.en': 'Superior Quality',
+          'services.card3.desc': '质量第一，质量和安全是企业的生命',
+          'services.card4.title': '技术先进',
+          'services.card4.en': 'Advanced Technology',
+          'services.card4.desc': '欧盟标准、自主知识产权专利产品',
+          'news.title': '新闻动态',
+          'news.desc': '了解童印最新资讯与行业动态',
+          'news.card1.img': '展会展览',
+          'news.card1.title': '参加各样展会展览',
+          'news.card1.desc': '各式展会展览，欢迎莅临参观指导。',
+          'news.card2.img': '荣誉证书',
+          'news.card2.title': '最新产品设计与展览',
+          'news.card2.desc': '欢迎您访问，有一系列最新的项目与精湛的设计展览。',
+          'news.card3.img': '婴儿床摇床宝宝床',
+          'news.card3.title': '童印荣获多项权威认证',
+          'news.card3.desc': '公司产品符合欧盟标准，拥有自主知识产权专利技术。',
+          'news.more': '+ 更多新闻',
+          'footer.company': '中山市童印儿童用品有限公司',
+          'footer.address': '广东省中山市小榄镇',
+          'footer.tel': '电话：0760-2210 0000',
+          'footer.products.title': '产品中心',
+          'footer.products.l1': '电动婴儿秋千',
+          'footer.products.l2': '多功能婴儿车',
+          'footer.products.l3': '电动婴儿摇椅',
+          'footer.products.l4': '婴儿摇篮/床',
+          'footer.products.l5': '多功能餐椅',
+          'footer.about.title': '关于童印',
+          'footer.about.l1': '公司简介',
+          'footer.about.l2': '企业文化',
+          'footer.about.l3': '发展历程',
+          'footer.about.l4': '荣誉证书',
+          'footer.support.title': '服务支持',
+          'footer.support.l1': '服务理念',
+          'footer.support.l2': '常见问题',
+          'footer.support.l3': '留言反馈',
+          'footer.support.l4': '联系我们',
+          'footer.copyright': 'Copyright &copy; 2016 - 2025 togyibaby.com All Rights Reserved.'
+        },
+        en: {
+          'nav.products': 'Products',
+          'nav.about': 'About Us',
+          'nav.download': 'App Download',
+          'nav.news': 'News',
+          'nav.services': 'Support',
+          'nav.contact': 'Contact',
+          'hero.s1.title': 'Safe <strong>TongYin</strong><br>Grow with Every Step',
+          'hero.s1.desc': 'Patented electric baby swings, rocking chairs & cradles with EU safety certification',
+          'hero.s1.btn': 'Explore Products',
+          'hero.s2.title': 'Tech <strong>Care</strong><br>Smart Sway, Baby Sleeps',
+          'hero.s2.desc': 'Microcomputer control, patented IP products, stable & reassuring quality',
+          'hero.s2.btn': 'Learn More',
+          'hero.s3.title': 'Trusted by <strong>Millions</strong><br>of Moms Worldwide',
+          'hero.s3.desc': 'Integrated R&D, production & sales, exporting globally',
+          'hero.s3.btn': 'View Products',
+          'download.title': 'App Download',
+          'download.desc': 'Scan the QR code or tap the button to download the TongYin app for Android or iOS',
+          'download.eyebrow': 'TongYin App',
+          'download.heading': 'A better mobile experience<br>for product info and support',
+          'download.copy': 'Android packages, App Store links or enterprise download links can be configured here. Once the URLs are added, QR codes are generated automatically and buttons jump to each platform.',
+          'download.android.title': 'Android Download',
+          'download.android.desc': 'For Android phones and tablets',
+          'download.android.qr': 'Android download QR code',
+          'download.android.btn': 'Android Download',
+          'download.ios.title': 'iOS Download',
+          'download.ios.desc': 'For iPhone and iPad',
+          'download.ios.qr': 'iOS download QR code',
+          'download.ios.btn': 'iOS Download',
+          'download.qr.pending': 'QR code pending',
+          'products.title': 'Products',
+          'products.desc': 'Electric Swings &middot; Rocking Chairs &middot; Cradles &middot; High Chairs &middot; Strollers',
+          'products.tabs.all': 'All',
+          'products.tabs.swing': 'Electric Swings',
+          'products.tabs.rocking': 'Rocking Chairs',
+          'products.tabs.cradle': 'Cradles / Beds',
+          'products.card1.img': 'Newborn Smart Swing',
+          'products.card1.title': 'Newborn Smart Swing',
+          'products.card1.desc': 'Gentle swaying, smart timer, soothing comfort',
+          'products.card2.img': 'Large Electric Rocking Chair',
+          'products.card2.title': 'Large Electric Rocking Chair',
+          'products.card2.desc': 'Rocking chair cradle combo, baby soothing helper',
+          'products.card3.img': 'Baby Cradle Bed',
+          'products.card3.title': 'Baby Cradle Bed',
+          'products.card3.desc': 'Electric cradle, playpen & sleeping basket',
+          'products.card4.img': 'Electric Rocking Cradle',
+          'products.card4.title': 'Electric Rocking Cradle',
+          'products.card4.desc': 'Baby rocking recliner with swing & hammock',
+          'products.card5.img': 'Large Electric Rocker',
+          'products.card5.title': 'Large Electric Rocker',
+          'products.card5.desc': 'Comfort recliner cradle, soothing sleep helper',
+          'products.card6.img': 'Multi-function Electric Cradle',
+          'products.card6.title': 'Multi-function Electric Cradle',
+          'products.card6.desc': 'Sleep soother with mosquito net',
+          'about.title': 'About TongYin',
+          'about.desc': 'An integrated R&D, manufacturing & sales baby products company',
+          'about.img': 'TongYin Company',
+          'about.heading': 'Since <span>2008</span> &middot; Uncompromising Quality',
+          'about.p1': 'Zhongshan TongYin Baby Products Co., Ltd. was founded in 2008, covering 11,401 sqm in Xiaolan Town, Zhongshan, Guangdong. We specialize in designing, manufacturing and selling electric baby swings, multi-functional rocking chairs, electric rockers, cradles, high chairs and strollers.',
+          'about.p2': 'Our products comply with EN16232, EN71, EN12790, EN62115 and related standards. Adhering to "Quality First — quality and safety are the life of the enterprise", our mass production defect rate has been consistently below 1%.',
+          'about.btn': 'Learn More',
+          'services.title': 'Our Advantages',
+          'services.desc': 'Dedicated after-sales team providing the most caring service for your baby\'s healthy growth',
+          'services.card1.title': 'Professional Team',
+          'services.card1.en': 'Professional Team',
+          'services.card1.desc': 'International-level R&D team & strong after-sales service',
+          'services.card2.title': 'Premium Service',
+          'services.card2.en': 'Premium Service',
+          'services.card2.desc': 'People-oriented, integrity first, attentive care',
+          'services.card3.title': 'Superior Quality',
+          'services.card3.en': 'Superior Quality',
+          'services.card3.desc': 'Quality first — quality and safety are our lifeline',
+          'services.card4.title': 'Advanced Technology',
+          'services.card4.en': 'Advanced Technology',
+          'services.card4.desc': 'EU standards, patented products with independent IP',
+          'news.title': 'News',
+          'news.desc': 'Latest updates and industry insights from TongYin',
+          'news.card1.img': 'Exhibition',
+          'news.card1.title': 'Attending Various Exhibitions',
+          'news.card1.desc': 'Welcome to visit our booth at upcoming trade shows.',
+          'news.card2.img': 'Certificates',
+          'news.card2.title': 'New Product Design & Exhibition',
+          'news.card2.desc': 'Welcome to explore our latest projects and exquisite designs.',
+          'news.card3.img': 'Baby Crib',
+          'news.card3.title': 'TongYin Receives Multiple Certifications',
+          'news.card3.desc': 'Our products meet EU standards with patented IP technology.',
+          'news.more': '+ More News',
+          'footer.company': 'Zhongshan TongYin Baby Products Co., Ltd.',
+          'footer.address': 'Xiaolan Town, Zhongshan, Guangdong, China',
+          'footer.tel': 'Tel: 0760-2210 0000',
+          'footer.products.title': 'Products',
+          'footer.products.l1': 'Electric Baby Swing',
+          'footer.products.l2': 'Multi-function Stroller',
+          'footer.products.l3': 'Electric Rocking Chair',
+          'footer.products.l4': 'Baby Cradle / Bed',
+          'footer.products.l5': 'Multi-function High Chair',
+          'footer.about.title': 'About Us',
+          'footer.about.l1': 'Company Profile',
+          'footer.about.l2': 'Corporate Culture',
+          'footer.about.l3': 'History',
+          'footer.about.l4': 'Certificates',
+          'footer.support.title': 'Support',
+          'footer.support.l1': 'Service Philosophy',
+          'footer.support.l2': 'FAQ',
+          'footer.support.l3': 'Feedback',
+          'footer.support.l4': 'Contact Us',
+          'footer.copyright': 'Copyright &copy; 2016 - 2025 togyibaby.com All Rights Reserved.'
+        }
+      };
+
+      // ===== i18n engine =====
+      var currentLang = 'zh';
+
+      function applyLang(l) {
+        currentLang = l;
+        var dict = lang[l];
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (dict[key] !== undefined) {
+            el.innerHTML = dict[key];
+          }
+        });
+        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n-alt');
+          if (dict[key] !== undefined) {
+            el.setAttribute('alt', dict[key]);
+          }
+        });
+        document.querySelectorAll('.header-lang a').forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('data-lang') === l);
+        });
+      }
+
+      document.querySelectorAll('.header-lang a[data-lang]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyLang(this.getAttribute('data-lang'));
+        });
+      });
+
+      // ===== Download links and QR codes =====
+      function setupDownloads() {
+        var qrApi = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=';
+
+        document.querySelectorAll('.download-card[data-platform]').forEach(function (card) {
+          var platform = card.getAttribute('data-platform');
+          var url = downloadLinks[platform];
+          var button = card.querySelector('.download-btn');
+          var qr = card.querySelector('.download-qr');
+          var placeholder = card.querySelector('.qr-placeholder');
+
+          if (url) {
+            button.setAttribute('href', url);
+            button.removeAttribute('target');
+            button.removeAttribute('aria-disabled');
+            button.classList.remove('disabled');
+            qr.setAttribute('src', qrApi + encodeURIComponent(url));
+            qr.hidden = false;
+            placeholder.hidden = true;
+          } else {
+            button.setAttribute('href', '#download');
+            button.removeAttribute('target');
+            button.setAttribute('aria-disabled', 'true');
+            button.classList.add('disabled');
+            qr.removeAttribute('src');
+            qr.hidden = true;
+            placeholder.hidden = false;
+          }
+        });
+      }
+
+      setupDownloads();
+
+      document.querySelectorAll('.download-btn[data-platform]').forEach(function (button) {
+        button.addEventListener('click', function (event) {
+          var platform = button.getAttribute('data-platform');
+          var url = downloadLinks[platform];
+
+          if (!url) {
+            event.preventDefault();
+            return;
+          }
+
+          event.preventDefault();
+          window.location.href = url;
+        });
+      });
+
+      // ===== Hero slider =====
+      var slides = document.querySelectorAll('#heroSlides .hero-slide');
+      var bgs = document.querySelectorAll('#heroSlides .hero-bg');
+      var dots = document.querySelectorAll('#heroDots span');
+      var current = 0;
+      var timer;
+
+      function showSlide(idx) {
+        slides.forEach(function (s) { s.classList.remove('active'); });
+        bgs.forEach(function (b) { b.classList.remove('active'); });
+        dots.forEach(function (d) { d.classList.remove('active'); });
+        slides[idx].classList.add('active');
+        bgs[idx].classList.add('active');
+        dots[idx].classList.add('active');
+        current = idx;
+      }
+
+      function nextSlide() { showSlide((current + 1) % slides.length); }
+      function startAuto() { timer = setInterval(nextSlide, 5000); }
+      function stopAuto() { clearInterval(timer); }
+
+      dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () { showSlide(i); });
+      });
+
+      var hero = document.getElementById('hero');
+      hero.addEventListener('mouseenter', stopAuto);
+      hero.addEventListener('mouseleave', startAuto);
+      startAuto();
+
+      // ===== Product tabs =====
+      var tabs = document.querySelectorAll('#productTabs button');
+      var cards = document.querySelectorAll('#productGrid .product-card');
+
+      tabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          tabs.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var cat = btn.getAttribute('data-cat');
+          cards.forEach(function (card) {
+            card.style.display = (cat === 'all' || card.getAttribute('data-cat') === cat) ? '' : 'none';
+          });
+        });
+      });
+
+      // ===== Mobile menu =====
+      var toggle = document.getElementById('menuToggle');
+      var nav = document.getElementById('nav');
+      toggle.addEventListener('click', function () { nav.classList.toggle('open'); });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { nav.classList.remove('open'); });
+      });
+    })();
+  </script>
+</body>
+</html>
