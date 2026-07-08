@@ -292,6 +292,57 @@
       background: #d8cdc6; color: #fff; cursor: default; pointer-events: none;
       box-shadow: none; transform: none;
     }
+    .download-modal {
+      position: fixed; inset: 0; z-index: 1000;
+      display: none; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(45,40,36,.52);
+    }
+    .download-modal.open { display: flex; }
+    .download-modal-panel {
+      position: relative; width: min(420px, 100%);
+      background: #fff; border-radius: 16px; padding: 30px 24px 24px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.18); text-align: center;
+    }
+    .download-modal-close {
+      position: absolute; top: 12px; right: 12px;
+      width: 34px; height: 34px; border: none; border-radius: 50%;
+      background: #f5f0ec; color: #6b625a; font-size: 20px;
+      cursor: pointer;
+    }
+    .download-modal-panel h3 {
+      color: #3d3530; font-size: 22px; margin-bottom: 12px;
+    }
+    .download-modal-panel p {
+      color: #6b625a; font-size: 14px; line-height: 1.8; margin-bottom: 18px;
+    }
+    .download-wechat-steps {
+      list-style: none; text-align: left; margin: 0 0 18px;
+      padding: 14px 16px; border-radius: 12px;
+      background: #fcf9f7; border: 1px solid #f0ebe7;
+    }
+    .download-wechat-steps li {
+      color: #4a4540; font-size: 14px; line-height: 1.7;
+    }
+    .download-wechat-steps li + li { margin-top: 6px; }
+    .download-modal-actions {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .download-modal-actions button,
+    .download-modal-actions a {
+      min-height: 42px; border-radius: 40px; border: 1px solid #c4917a;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+    .download-modal-actions button {
+      background: #c4917a; color: #fff;
+    }
+    .download-modal-actions a {
+      background: #fff; color: #c4917a;
+    }
+    .download-copy-status {
+      display: none; margin: 14px 0 0; color: #8a7f75; font-size: 13px;
+    }
+    .download-copy-status.show { display: block; }
 
     /* Footer */
     .footer {
@@ -425,6 +476,8 @@
       .download-card h4 { font-size: 18px; }
       .download-card p { min-height: 0; }
       .download-btn { width: 100%; }
+      .download-modal-panel { padding: 28px 20px 22px; }
+      .download-modal-actions { grid-template-columns: 1fr; }
 
       .about-text h3 { font-size: 18px; }
       .about-text p { font-size: 13px; line-height: 1.7; }
@@ -538,6 +591,24 @@
       </div>
     </div>
   </section>
+
+  <div class="download-modal" id="wechatDownloadTip" aria-hidden="true">
+    <div class="download-modal-panel" role="dialog" aria-modal="true" aria-labelledby="wechatTipTitle">
+      <button class="download-modal-close" type="button" id="wechatTipClose" aria-label="Close">x</button>
+      <h3 id="wechatTipTitle" data-i18n="download.wechat.title">Open in Browser</h3>
+      <p data-i18n="download.wechat.desc">WeChat may block APK downloads. Please tap the menu in the top-right corner and choose "Open in Browser", or copy the download link and open it in your phone browser.</p>
+      <ol class="download-wechat-steps">
+        <li data-i18n="download.wechat.step1">1. Tap the "..." menu in the top-right corner.</li>
+        <li data-i18n="download.wechat.step2">2. Choose "Open in Browser".</li>
+        <li data-i18n="download.wechat.step3">3. Tap Android Download again.</li>
+      </ol>
+      <div class="download-modal-actions">
+        <button type="button" id="copyAndroidLink" data-i18n="download.wechat.copy">Copy Link</button>
+        <a id="androidDirectLink" href="https://www.togyibaby.com/app-release.apk" rel="noopener" data-i18n="download.wechat.continue">Continue</a>
+      </div>
+      <div class="download-copy-status" id="copyStatus" data-i18n="download.wechat.copied">Link copied. Open it in your phone browser.</div>
+    </div>
+  </div>
 
   <section class="products" id="products">
     <div class="container">
@@ -716,8 +787,8 @@
           <a href="#" class="logo">童印 · Baby</a>
           <p data-i18n="footer.company">中山市童印儿童用品有限公司</p>
           <p data-i18n="footer.address">广东省中山市小榄镇</p>
-          <p data-i18n="footer.tel">电话：0760-2210 0000</p>
-          <p>邮箱：info@tongyin-baby.com</p>
+          <p data-i18n="footer.tel">电话：+86 18125331796</p>
+          <p data-i18n="footer.email">邮箱：sales@togyibaby.com</p>
         </div>
         <div>
           <h3 data-i18n="footer.products.title">产品中心</h3>
@@ -754,7 +825,7 @@
     (function () {
       // 在这里替换下载地址，二维码和按钮会自动更新。
       var downloadLinks = {
-        android: 'http://www.togyibaby.com/app-release.apk',
+        android: 'https://www.togyibaby.com/app-release.apk',
         ios: 'https://apps.apple.com/cn/app/baby-bouncer/id6748784747'
       };
 
@@ -790,6 +861,14 @@
           'download.ios.qr': '苹果下载二维码',
           'download.ios.btn': '苹果下载',
           'download.qr.pending': '二维码待配置',
+          'download.wechat.title': '请在浏览器中打开',
+          'download.wechat.desc': '微信不允许网页强制跳出到本地浏览器，且可能会拦截 APK 下载。请按下面步骤用手机浏览器打开。',
+          'download.wechat.step1': '1. 点击右上角“...”菜单。',
+          'download.wechat.step2': '2. 选择“在浏览器打开”。',
+          'download.wechat.step3': '3. 再点击“安卓下载”。',
+          'download.wechat.copy': '复制链接',
+          'download.wechat.continue': '继续下载',
+          'download.wechat.copied': '链接已复制，请到手机浏览器中打开。',
           'products.title': '产品中心',
           'products.desc': '电动婴儿秋千 · 电动摇椅 · 婴儿摇篮 · 多功能餐椅 · 婴儿推车',
           'products.tabs.all': '全部',
@@ -849,7 +928,8 @@
           'news.more': '+ 更多新闻',
           'footer.company': '中山市童印儿童用品有限公司',
           'footer.address': '广东省中山市小榄镇',
-          'footer.tel': '电话：0760-2210 0000',
+          'footer.tel': '电话：+86 18125331796',
+          'footer.email': '邮箱：sales@togyibaby.com',
           'footer.products.title': '产品中心',
           'footer.products.l1': '电动婴儿秋千',
           'footer.products.l2': '多功能婴儿车',
@@ -898,6 +978,14 @@
           'download.ios.qr': 'iOS download QR code',
           'download.ios.btn': 'iOS Download',
           'download.qr.pending': 'QR code pending',
+          'download.wechat.title': 'Open in Browser',
+          'download.wechat.desc': 'WeChat does not allow webpages to force-open your phone browser, and it may block APK downloads. Please open this page in your phone browser first.',
+          'download.wechat.step1': '1. Tap the "..." menu in the top-right corner.',
+          'download.wechat.step2': '2. Choose "Open in Browser".',
+          'download.wechat.step3': '3. Tap Android Download again.',
+          'download.wechat.copy': 'Copy Link',
+          'download.wechat.continue': 'Continue',
+          'download.wechat.copied': 'Link copied. Open it in your phone browser.',
           'products.title': 'Products',
           'products.desc': 'Electric Swings &middot; Rocking Chairs &middot; Cradles &middot; High Chairs &middot; Strollers',
           'products.tabs.all': 'All',
@@ -957,7 +1045,8 @@
           'news.more': '+ More News',
           'footer.company': 'Zhongshan TongYin Baby Products Co., Ltd.',
           'footer.address': 'Xiaolan Town, Zhongshan, Guangdong, China',
-          'footer.tel': 'Tel: 0760-2210 0000',
+          'footer.tel': 'Tel: +86 18125331796',
+          'footer.email': 'Email: sales@togyibaby.com',
           'footer.products.title': 'Products',
           'footer.products.l1': 'Electric Baby Swing',
           'footer.products.l2': 'Multi-function Stroller',
@@ -1011,6 +1100,55 @@
       applyLang(currentLang);
 
       // ===== Download links and QR codes =====
+      var isWechat = /MicroMessenger/i.test(navigator.userAgent);
+      var wechatTip = document.getElementById('wechatDownloadTip');
+      var wechatTipClose = document.getElementById('wechatTipClose');
+      var copyAndroidLink = document.getElementById('copyAndroidLink');
+      var androidDirectLink = document.getElementById('androidDirectLink');
+      var copyStatus = document.getElementById('copyStatus');
+
+      function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          return navigator.clipboard.writeText(text);
+        }
+
+        var input = document.createElement('textarea');
+        input.value = text;
+        input.setAttribute('readonly', '');
+        input.style.position = 'fixed';
+        input.style.left = '-9999px';
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        return Promise.resolve();
+      }
+
+      function openWechatTip(url) {
+        androidDirectLink.setAttribute('href', url);
+        copyStatus.classList.remove('show');
+        wechatTip.classList.add('open');
+        wechatTip.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeWechatTip() {
+        wechatTip.classList.remove('open');
+        wechatTip.setAttribute('aria-hidden', 'true');
+      }
+
+      wechatTipClose.addEventListener('click', closeWechatTip);
+      wechatTip.addEventListener('click', function (event) {
+        if (event.target === wechatTip) {
+          closeWechatTip();
+        }
+      });
+
+      copyAndroidLink.addEventListener('click', function () {
+        copyText(downloadLinks.android).then(function () {
+          copyStatus.classList.add('show');
+        });
+      });
+
       function setupDownloads() {
         var qrApi = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=';
 
@@ -1054,6 +1192,11 @@
           }
 
           event.preventDefault();
+          if (platform === 'android' && isWechat) {
+            openWechatTip(url);
+            return;
+          }
+
           window.location.href = url;
         });
       });
