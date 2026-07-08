@@ -238,6 +238,14 @@
     .download-list {
       display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
     }
+    .wechat-inline-tip {
+      display: none; margin: 0 0 24px; padding: 16px 18px;
+      border: 1px solid #eadfd8; border-radius: 14px;
+      background: #fff7f3; color: #6b625a; font-size: 14px;
+      line-height: 1.7; text-align: center;
+    }
+    .wechat-inline-tip.show { display: block; }
+    .wechat-inline-tip strong { color: #c4917a; }
     .download-card {
       background: #fff; border: 1px solid #f0ebe7; border-radius: 16px;
       padding: 28px; box-shadow: 0 8px 28px rgba(61,53,48,.06);
@@ -560,6 +568,7 @@
         <h2 data-i18n="download.title">APP下载</h2>
         <p data-i18n="download.desc">扫码或点击按钮下载童印 APP，安卓与苹果版本将按设备分别跳转</p>
       </div>
+      <div class="wechat-inline-tip" id="wechatInlineTip" data-i18n="download.wechat.inline">WeChat may block downloads or App Store redirects. Please tap <strong>...</strong> in the top-right corner and choose <strong>Open in Browser</strong>.</div>
       <div class="download-wrap">
         <div class="download-intro">
           <div class="eyebrow" data-i18n="download.eyebrow">TongYin App</div>
@@ -600,11 +609,11 @@
       <ol class="download-wechat-steps">
         <li data-i18n="download.wechat.step1">1. Tap the "..." menu in the top-right corner.</li>
         <li data-i18n="download.wechat.step2">2. Choose "Open in Browser".</li>
-        <li data-i18n="download.wechat.step3">3. Tap Android Download again.</li>
+        <li data-i18n="download.wechat.step3">3. Tap the download button again.</li>
       </ol>
       <div class="download-modal-actions">
-        <button type="button" id="copyAndroidLink" data-i18n="download.wechat.copy">Copy Link</button>
-        <a id="androidDirectLink" href="https://www.togyibaby.com/app-release.apk" rel="noopener" data-i18n="download.wechat.continue">Continue</a>
+        <button type="button" id="copyDownloadLink" data-i18n="download.wechat.copy">Copy Link</button>
+        <a id="downloadDirectLink" href="https://www.togyibaby.com/app-release.apk" rel="noopener" data-i18n="download.wechat.continue">Continue</a>
       </div>
       <div class="download-copy-status" id="copyStatus" data-i18n="download.wechat.copied">Link copied. Open it in your phone browser.</div>
     </div>
@@ -862,10 +871,11 @@
           'download.ios.btn': '苹果下载',
           'download.qr.pending': '二维码待配置',
           'download.wechat.title': '请在浏览器中打开',
-          'download.wechat.desc': '微信不允许网页强制跳出到本地浏览器，且可能会拦截 APK 下载。请按下面步骤用手机浏览器打开。',
+          'download.wechat.inline': '检测到微信浏览器。微信可能会拦截下载或 App Store 跳转，请点击右上角 <strong>...</strong>，选择 <strong>在浏览器打开</strong>。',
+          'download.wechat.desc': '微信不允许网页强制跳出到本地浏览器，且可能会拦截下载或 App Store 跳转。请按下面步骤用手机浏览器打开。',
           'download.wechat.step1': '1. 点击右上角“...”菜单。',
           'download.wechat.step2': '2. 选择“在浏览器打开”。',
-          'download.wechat.step3': '3. 再点击“安卓下载”。',
+          'download.wechat.step3': '3. 再点击对应下载按钮。',
           'download.wechat.copy': '复制链接',
           'download.wechat.continue': '继续下载',
           'download.wechat.copied': '链接已复制，请到手机浏览器中打开。',
@@ -979,10 +989,11 @@
           'download.ios.btn': 'iOS Download',
           'download.qr.pending': 'QR code pending',
           'download.wechat.title': 'Open in Browser',
-          'download.wechat.desc': 'WeChat does not allow webpages to force-open your phone browser, and it may block APK downloads. Please open this page in your phone browser first.',
+          'download.wechat.inline': 'WeChat detected. WeChat may block downloads or App Store redirects. Please tap <strong>...</strong> in the top-right corner and choose <strong>Open in Browser</strong>.',
+          'download.wechat.desc': 'WeChat does not allow webpages to force-open your phone browser, and it may block downloads or App Store redirects. Please open this page in your phone browser first.',
           'download.wechat.step1': '1. Tap the "..." menu in the top-right corner.',
           'download.wechat.step2': '2. Choose "Open in Browser".',
-          'download.wechat.step3': '3. Tap Android Download again.',
+          'download.wechat.step3': '3. Tap the download button again.',
           'download.wechat.copy': 'Copy Link',
           'download.wechat.continue': 'Continue',
           'download.wechat.copied': 'Link copied. Open it in your phone browser.',
@@ -1101,11 +1112,13 @@
 
       // ===== Download links and QR codes =====
       var isWechat = /MicroMessenger/i.test(navigator.userAgent);
+      var wechatInlineTip = document.getElementById('wechatInlineTip');
       var wechatTip = document.getElementById('wechatDownloadTip');
       var wechatTipClose = document.getElementById('wechatTipClose');
-      var copyAndroidLink = document.getElementById('copyAndroidLink');
-      var androidDirectLink = document.getElementById('androidDirectLink');
+      var copyDownloadLink = document.getElementById('copyDownloadLink');
+      var downloadDirectLink = document.getElementById('downloadDirectLink');
       var copyStatus = document.getElementById('copyStatus');
+      var currentDownloadUrl = '';
 
       function copyText(text) {
         if (navigator.clipboard && window.isSecureContext) {
@@ -1125,7 +1138,8 @@
       }
 
       function openWechatTip(url) {
-        androidDirectLink.setAttribute('href', url);
+        currentDownloadUrl = url;
+        downloadDirectLink.setAttribute('href', url);
         copyStatus.classList.remove('show');
         wechatTip.classList.add('open');
         wechatTip.setAttribute('aria-hidden', 'false');
@@ -1143,11 +1157,15 @@
         }
       });
 
-      copyAndroidLink.addEventListener('click', function () {
-        copyText(downloadLinks.android).then(function () {
+      copyDownloadLink.addEventListener('click', function () {
+        copyText(currentDownloadUrl).then(function () {
           copyStatus.classList.add('show');
         });
       });
+
+      if (isWechat) {
+        wechatInlineTip.classList.add('show');
+      }
 
       function setupDownloads() {
         var qrApi = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=';
@@ -1192,7 +1210,7 @@
           }
 
           event.preventDefault();
-          if (platform === 'android' && isWechat) {
+          if (isWechat) {
             openWechatTip(url);
             return;
           }
