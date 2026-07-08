@@ -300,57 +300,49 @@
       background: #d8cdc6; color: #fff; cursor: default; pointer-events: none;
       box-shadow: none; transform: none;
     }
-    .download-modal {
+    .wechat-overlay {
       position: fixed; inset: 0; z-index: 1000;
-      display: none; align-items: center; justify-content: center;
-      padding: 20px; background: rgba(45,40,36,.52);
+      display: none; background: rgba(0,0,0,.45);
+      pointer-events: auto;
     }
-    .download-modal.open { display: flex; }
-    .download-modal-panel {
-      position: relative; width: min(420px, 100%);
-      background: #fff; border-radius: 16px; padding: 30px 24px 24px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.18); text-align: center;
+    .wechat-overlay.open { display: block; }
+    .wechat-overlay-close {
+      position: absolute; top: 16px; left: 16px;
+      width: 42px; height: 42px; border: none; border-radius: 50%;
+      background: rgba(255,255,255,.16); color: #fff;
+      font-size: 28px; line-height: 1; cursor: pointer;
     }
-    .download-modal-close {
-      position: absolute; top: 12px; right: 12px;
-      width: 34px; height: 34px; border: none; border-radius: 50%;
-      background: #f5f0ec; color: #6b625a; font-size: 20px;
-      cursor: pointer;
+    .wechat-guide-panel {
+      position: relative; margin-top: 88px; padding: 30px 74px 30px 28px;
+      background: rgba(30,30,30,.88); color: rgba(255,255,255,.82);
+      box-shadow: 0 14px 40px rgba(0,0,0,.28);
     }
-    .download-modal-panel h3 {
-      color: #3d3530; font-size: 22px; margin-bottom: 12px;
+    .wechat-guide-panel p {
+      max-width: 720px; color: rgba(255,255,255,.78);
+      font-size: 24px; line-height: 1.75; letter-spacing: 1px;
     }
-    .download-modal-panel p {
-      color: #6b625a; font-size: 14px; line-height: 1.8; margin-bottom: 18px;
+    .wechat-guide-panel strong { color: #fff; font-weight: 700; }
+    .wechat-guide-arrow {
+      position: absolute; top: 28px; right: 28px;
+      width: 50px; height: 76px; color: rgba(255,255,255,.86);
     }
-    .download-wechat-steps {
-      list-style: none; text-align: left; margin: 0 0 18px;
-      padding: 14px 16px; border-radius: 12px;
-      background: #fcf9f7; border: 1px solid #f0ebe7;
+    .wechat-guide-actions {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px;
     }
-    .download-wechat-steps li {
-      color: #4a4540; font-size: 14px; line-height: 1.7;
-    }
-    .download-wechat-steps li + li { margin-top: 6px; }
-    .download-modal-actions {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-    }
-    .download-modal-actions button,
-    .download-modal-actions a {
-      min-height: 42px; border-radius: 40px; border: 1px solid #c4917a;
+    .wechat-guide-actions button,
+    .wechat-guide-actions a {
+      min-height: 38px; border-radius: 40px; border: 1px solid rgba(255,255,255,.6);
       display: inline-flex; align-items: center; justify-content: center;
-      padding: 10px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+      padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer;
+      color: #fff; background: rgba(255,255,255,.12);
     }
-    .download-modal-actions button {
-      background: #c4917a; color: #fff;
+    .wechat-guide-actions button {
+      background: #c4917a; border-color: #c4917a;
     }
-    .download-modal-actions a {
-      background: #fff; color: #c4917a;
+    .wechat-copy-status {
+      display: none; margin-top: 12px; color: rgba(255,255,255,.78); font-size: 13px;
     }
-    .download-copy-status {
-      display: none; margin: 14px 0 0; color: #8a7f75; font-size: 13px;
-    }
-    .download-copy-status.show { display: block; }
+    .wechat-copy-status.show { display: block; }
 
     /* Footer */
     .footer {
@@ -484,8 +476,11 @@
       .download-card h4 { font-size: 18px; }
       .download-card p { min-height: 0; }
       .download-btn { width: 100%; }
-      .download-modal-panel { padding: 28px 20px 22px; }
-      .download-modal-actions { grid-template-columns: 1fr; }
+      .wechat-overlay-close { top: 12px; left: 12px; }
+      .wechat-guide-panel { margin-top: 76px; padding: 24px 64px 24px 22px; }
+      .wechat-guide-panel p { font-size: 18px; line-height: 1.8; }
+      .wechat-guide-arrow { top: 22px; right: 18px; width: 42px; height: 66px; }
+      .wechat-guide-actions { flex-direction: column; }
 
       .about-text h3 { font-size: 18px; }
       .about-text p { font-size: 13px; line-height: 1.7; }
@@ -601,21 +596,19 @@
     </div>
   </section>
 
-  <div class="download-modal" id="wechatDownloadTip" aria-hidden="true">
-    <div class="download-modal-panel" role="dialog" aria-modal="true" aria-labelledby="wechatTipTitle">
-      <button class="download-modal-close" type="button" id="wechatTipClose" aria-label="Close">x</button>
-      <h3 id="wechatTipTitle" data-i18n="download.wechat.title">Open in Browser</h3>
-      <p data-i18n="download.wechat.desc">WeChat may block APK downloads. Please tap the menu in the top-right corner and choose "Open in Browser", or copy the download link and open it in your phone browser.</p>
-      <ol class="download-wechat-steps">
-        <li data-i18n="download.wechat.step1">1. Tap the "..." menu in the top-right corner.</li>
-        <li data-i18n="download.wechat.step2">2. Choose "Open in Browser".</li>
-        <li data-i18n="download.wechat.step3">3. Tap the download button again.</li>
-      </ol>
-      <div class="download-modal-actions">
+  <div class="wechat-overlay" id="wechatDownloadTip" aria-hidden="true">
+    <button class="wechat-overlay-close" type="button" id="wechatTipClose" aria-label="Close">x</button>
+    <div class="wechat-guide-panel" role="dialog" aria-modal="true">
+      <p data-i18n="download.wechat.guide">Tap the <strong>...</strong> button in the top-right corner, then choose <strong>Open in Browser</strong>. You can also copy the link and open it in your phone browser.</p>
+      <svg class="wechat-guide-arrow" viewBox="0 0 64 96" aria-hidden="true">
+        <path d="M8 80 C42 78 46 40 28 34 C16 30 12 46 24 50 C43 56 52 26 50 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+        <path d="M40 14 L50 6 L58 18" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="wechat-guide-actions">
         <button type="button" id="copyDownloadLink" data-i18n="download.wechat.copy">Copy Link</button>
         <a id="downloadDirectLink" href="https://www.togyibaby.com/app-release.apk" rel="noopener" data-i18n="download.wechat.continue">Continue</a>
       </div>
-      <div class="download-copy-status" id="copyStatus" data-i18n="download.wechat.copied">Link copied. Open it in your phone browser.</div>
+      <div class="wechat-copy-status" id="copyStatus" data-i18n="download.wechat.copied">Link copied. Open it in your phone browser.</div>
     </div>
   </div>
 
@@ -870,12 +863,8 @@
           'download.ios.qr': '苹果下载二维码',
           'download.ios.btn': '苹果下载',
           'download.qr.pending': '二维码待配置',
-          'download.wechat.title': '请在浏览器中打开',
           'download.wechat.inline': '检测到微信浏览器。微信可能会拦截下载或 App Store 跳转，请点击右上角 <strong>...</strong>，选择 <strong>在浏览器打开</strong>。',
-          'download.wechat.desc': '微信不允许网页强制跳出到本地浏览器，且可能会拦截下载或 App Store 跳转。请按下面步骤用手机浏览器打开。',
-          'download.wechat.step1': '1. 点击右上角“...”菜单。',
-          'download.wechat.step2': '2. 选择“在浏览器打开”。',
-          'download.wechat.step3': '3. 再点击对应下载按钮。',
+          'download.wechat.guide': '点击右上角 <strong>...</strong> 按钮，然后在弹出的菜单中选择 <strong>在浏览器打开</strong>。也可以复制链接到手机浏览器中打开。',
           'download.wechat.copy': '复制链接',
           'download.wechat.continue': '继续下载',
           'download.wechat.copied': '链接已复制，请到手机浏览器中打开。',
@@ -988,12 +977,8 @@
           'download.ios.qr': 'iOS download QR code',
           'download.ios.btn': 'iOS Download',
           'download.qr.pending': 'QR code pending',
-          'download.wechat.title': 'Open in Browser',
           'download.wechat.inline': 'WeChat detected. WeChat may block downloads or App Store redirects. Please tap <strong>...</strong> in the top-right corner and choose <strong>Open in Browser</strong>.',
-          'download.wechat.desc': 'WeChat does not allow webpages to force-open your phone browser, and it may block downloads or App Store redirects. Please open this page in your phone browser first.',
-          'download.wechat.step1': '1. Tap the "..." menu in the top-right corner.',
-          'download.wechat.step2': '2. Choose "Open in Browser".',
-          'download.wechat.step3': '3. Tap the download button again.',
+          'download.wechat.guide': 'Tap the <strong>...</strong> button in the top-right corner, then choose <strong>Open in Browser</strong>. You can also copy the link and open it in your phone browser.',
           'download.wechat.copy': 'Copy Link',
           'download.wechat.continue': 'Continue',
           'download.wechat.copied': 'Link copied. Open it in your phone browser.',
@@ -1165,6 +1150,7 @@
 
       if (isWechat) {
         wechatInlineTip.classList.add('show');
+        openWechatTip(window.location.href);
       }
 
       function setupDownloads() {
