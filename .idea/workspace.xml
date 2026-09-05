@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="737bb0e4-c523-4a4d-b3e2-0e19187d8674" name="Changes" comment="钱1123">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="737bb0e4-c523-4a4d-b3e2-0e19187d8674" name="Changes" comment="优化界面" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787980084802</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="优化界面">
+      <option name="closed" value="true" />
+      <created>1788439470415</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1788439470415</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -224,6 +230,7 @@
     <MESSAGE value="q" />
     <MESSAGE value="钱1" />
     <MESSAGE value="钱1123" />
-    <option name="LAST_COMMIT_MESSAGE" value="钱1123" />
+    <MESSAGE value="优化界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化界面" />
   </component>
 </project>
